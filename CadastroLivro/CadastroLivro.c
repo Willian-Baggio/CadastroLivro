@@ -2,109 +2,73 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MIN_LEN 4
-#define MAX_LEN 100
-
 struct livro
 {
     int codigo, ano;
-    char titulo[30], nome[50], area[20], autor[30], editora[30];
+    char titulo[30], area[30], autor[30], editora[30];
 };
 
 struct livro ficha[20];
 struct livro troca;
 
-int op, i, j, busca, acha, len, verifica;
+int codigo, op, i, j, busca, acha, len, resultadoScanf, busca, ahca;
 
-verifica = 0;
+int verifica = 0;
 
-/*----- FUN플O CADASTRA LIVROS -----*/
+/*----- FUNÇÃO CADASTRA LIVROS -----*/
 void CadastroLivro()
 {
-    int op, i, j, busca, acha, len, verifica;
-
-    verifica = 0;
-
     for (i=0; i<20; i++)
     {
         system("cls");
         printf("\nDigite o codigo do livro: ");
-        scanf("%d", &ficha[i].codigo);
         fflush(stdin);
+        scanf("%d", &ficha[i].codigo);
 
-        do
-        {
-            printf("\nDigite o titulo do livro: ", i + 1);
-            scanf("%s", &ficha[i].titulo);
+        do {
+            printf("\nDigite o titulo do livro: ");
             fflush(stdin);
-            len = strlen(ficha[i].titulo);
-
-            if (len < MIN_LEN)
-            {
-                printf("\nO titulo do livro deve ter pelo menos %d letras.\n", MIN_LEN);
-            }else
-            {
-                for (j = 0; j < len; j++)
-                {
-                    if (!isalpha(ficha[i].titulo[j]))
-                    {
-                        printf("\nO titulo do livro deve conter apenas letras.\n");
-                        break;
-                    }
-                }
+            scanf("%[^\n]s", &ficha[i].titulo);
+            if (strlen(ficha[i].titulo) < 4) {
+                printf("\nO titulo do livro deve ter pelo menos 4 caracteres.\n");
+                resultadoScanf = 0;
+            } else {
+                resultadoScanf = 1;
             }
-        }while (len < MIN_LEN || j < len);
+            while (getchar() != '\n');
+        } while (resultadoScanf != 1);
 
-        do
-        {
-            printf("\nDigite o nome do autor: ");
+        do {
+            printf("\nDigite nome do autor: ");
+            fflush(stdin);
             scanf("%[^\n]s", &ficha[i].autor);
-            fflush(stdin);
-            len = strlen(ficha[i].autor);
-
-            if (len < MIN_LEN)
-            {
-                printf("\nO nome do autor deve ter pelo menos %d letras.\n", MIN_LEN);
-            }else
-            {
-                for (j = 0; j < len; j++)
-                {
-                    if (!isalpha(ficha[i].autor[j]))
-                    {
-                        printf("\nO nome do autor deve conter apenas letras.\n");
-                        break;
-                    }
-                }
+            if (strlen(ficha[i].autor) < 4) {
+                printf("\nO nome do autor deve ter pelo menos 4 caracteres.\n");
+                resultadoScanf = 0;
+            } else {
+                resultadoScanf = 1;
             }
-        }while (len < MIN_LEN || j < len);
+            while (getchar() != '\n');
+        } while (resultadoScanf != 1);
 
-        do
-        {
-            printf("\nDigite a area do livro: ");
+        do {
+            printf("\nDigite area do livro: ");
+            fflush(stdin);
             scanf("%[^\n]s", &ficha[i].area);
-            fflush(stdin);
-            len = strlen(ficha[i].area);
-
-            if (len < MIN_LEN)
-            {
-                printf("\nA area do livro deve ter pelo menos %d letras.\n", MIN_LEN);
-            }else
-            {
-                for (j = 0; j < len; j++)
-                {
-                    if (!isalpha(ficha[i].area[j]))
-                    {
-                        printf("\nA area do livro deve conter apenas letras.\n");
-                        break;
-                    }
-                }
+            if (strlen(ficha[i].area) < 4) {
+                printf("\nA area do livro deve ter pelo menos 4 caracteres.\n");
+                resultadoScanf = 0;
+            } else {
+                resultadoScanf = 1;
             }
-        }while (len < MIN_LEN || j < len);
+            while (getchar() != '\n');
+        } while (resultadoScanf != 1);
 
 
         do
         {
             printf("\nDigite o ano do livro: ");
+            fflush(stdin);
             verifica = scanf("%d", &ficha[i].ano);
             fflush(stdin);
 
@@ -124,28 +88,18 @@ void CadastroLivro()
         }while (verifica != 1);
 
 
-        do
-        {
-            printf("\nDigite o nome da editora: ");
-            scanf("%[^\n]s", &ficha[i].editora);
+        do {
+            printf("\nDigite a editora do livro: ");
             fflush(stdin);
-            len = strlen(ficha[i].editora);
-
-            if (len < MIN_LEN)
-            {
-                printf("\nA editora do livro deve ter pelo menos %d letras.\n", MIN_LEN);
-            }else
-            {
-                for (j = 0; j < len; j++)
-                {
-                    if (!isalpha(ficha[i].editora[j]))
-                    {
-                        printf("\nA editora do livro deve conter apenas letras.\n");
-                        break;
-                    }
-                }
+            scanf("%[^\n]s", &ficha[i].editora);
+            if (strlen(ficha[i].editora) < 4) {
+                printf("\nA editora do livro deve ter pelo menos 4 caracteres.\n");
+                resultadoScanf = 0;
+            } else {
+                resultadoScanf = 1;
             }
-        }while (len < MIN_LEN || j < len);
+            while (getchar() != '\n');
+        } while (resultadoScanf != 1);
 
         system("pause");
         system("cls");
@@ -157,7 +111,7 @@ void CadastroLivro()
     }
 }
 
-/*----- FUN플O IMPRIME INFORMA합ES -----*/
+/*----- FUNÇÃO IMPRIME INFORMA합ES -----*/
 
 void ImprimeInformacoes()
 {
@@ -178,7 +132,7 @@ void ImprimeInformacoes()
     main();
 }
 
-/*----- FUNCAO PESQUISAR LIVROS -----*/
+/*----- FUNÇÃO PESQUISAR LIVROS -----*/
 
 void PesquisarLivros()
 {
@@ -216,37 +170,10 @@ void PesquisarLivros()
     main();
 }
 
-/*----- FUN플O ORDENA LIVROS -----*/
-
-void OrdenaLivros()
-{
-    system("cls");
-    for (i=0; i<19; i++)
-    {
-        for (j=i+1; j<20; j++)
-        {
-            if (ficha[i].ano > ficha[j].ano)
-            {
-                troca = ficha[i];
-                ficha[i] = ficha[j];
-                ficha[j] = troca;
-            }
-        }
-    }
-    for (i=0; i<20; i++)
-    {
-        printf("\nCODIGO: %d, TITULO: %s, ANO: %d\n", ficha[i].codigo, ficha[i].titulo, ficha[i].ano);
-    }
-    system("pause");
-    system("cls");
-    main();
-}
-
-
-    /*-----FUN플O REMOVE LIVROS-----*/
+/*-----FUNÇÃO REMOVE LIVROS-----*/
 void RemoveLivros()
 {
-    int op_livro, busca, acha;
+    int op_livro;
 
     i = 0;
     acha = 0;
@@ -310,8 +237,6 @@ void RemoveLivros()
             for (i=0; i<20; i++)
             {
                 system("cls");
-                printf("\nO titulo do livro sera excluido\n");
-                system("pause");
                 memset(&ficha[i].titulo,0,sizeof(ficha[i].titulo));
                 printf("\nTitulo excluido\n");
                 system("pause");
@@ -323,8 +248,6 @@ void RemoveLivros()
         for (i=0; i<20; i++)
             {
                 system("cls");
-                printf("\nA nome do autor sera excluido\n");
-                system("pause");
                 memset(&ficha[i].autor,0,sizeof(ficha[i].autor));
                 printf("\nAutor do livro excluido\n");
                 system("pause\n");
@@ -336,8 +259,6 @@ void RemoveLivros()
             for (i=0; i<20; i++)
             {
                 system("cls");
-                printf("\nA area do livro sera excluida\n");
-                system("pause");
                 memset(&ficha[i].area,0,sizeof(ficha[i].area));
                 printf("\nArea do livro excluido\n");
                 system("pause");
@@ -349,8 +270,6 @@ void RemoveLivros()
             for (i=0; i<20; i++)
             {
                 system("cls");
-                printf("\nO ano do livro sera excluido\n");
-                system("pause");
                 memset(&ficha[i].ano,0,sizeof(ficha[i].ano));
                 printf("\nAno do livro excluido\n");
                 system("pause");
@@ -362,8 +281,6 @@ void RemoveLivros()
             for (i=0; i<20; i++)
             {
                 system("cls");
-                printf("\nA editora do livro sera excluida\n");
-                system("pause");
                 memset(&ficha[i].editora,0,sizeof(ficha[i].editora));
                 printf("\nEditora do livro excluido\n");
                 system("pause");
@@ -386,7 +303,7 @@ void RemoveLivros()
 
 void AlteraLivro()
 {
-    int op_livro, busca, acha;
+    int op_livro;
 
     i = 0;
     acha = 0;
@@ -411,7 +328,7 @@ void AlteraLivro()
         printf ("\t\t\t|\t                                       |\n");
         printf("\t\t\t|    1 - Alterar codigo do livro               |\n");
         printf("\t\t\t|    2 - Alterar titulo do livro               |\n");
-        printf("\t\t\t|    3 - Alterar nome do autro                 |\n");
+        printf("\t\t\t|    3 - Alterar nome do autor                 |\n");
         printf("\t\t\t|    4 - Alterar area do livro                 |\n");
         printf("\t\t\t|    5 - Alterar ano do livro                  |\n");
         printf("\t\t\t|    6 - Alterar nome da editora               |\n");
@@ -449,28 +366,18 @@ void AlteraLivro()
         case 2:
             for (i=0; i<20; i++)
             {
-                do
-                {
-                    printf("\nInforme o titulo do livro que deseja alterar: ");
+                do {
+                    printf("\nDigite o titulo do livro: ");
                     fflush(stdin);
-                    scanf("%s", &ficha[i].titulo);
-                    len = strlen(ficha[i].titulo);
-
-                    if (len < MIN_LEN)
-                    {
-                        printf("\nO titulo do livro deve ter pelo menos %d letras\n", MIN_LEN);
-                    }else
-                    {
-                        for (j = 0; j < len; j++)
-                        {
-                            if (!isalpha(ficha[i].titulo[j]))
-                            {
-                                printf("\nO titulo do livro deve conter apenas letras.\n");
-                                break;
-                            }
-                        }
+                    scanf("%[^\n]s", &ficha[i].titulo);
+                    if (strlen(ficha[i].titulo) < 4) {
+                        printf("\nO titulo do livro deve ter pelo menos 4 caracteres.\n");
+                        resultadoScanf = 0;
+                    } else {
+                        resultadoScanf = 1;
                     }
-                }while (len < MIN_LEN || j < len);
+                    while (getchar() != '\n');
+                } while (resultadoScanf != 1);
                 printf("\nTitulo do livro alterado\n");
                 system("pause");
                 system("cls");
@@ -480,28 +387,18 @@ void AlteraLivro()
         case 3:
             for (i=0; i<20; i++)
             {
-                do
-                {
-                    printf("\nDigite o nome do autor: ");
-                    scanf("%s", &ficha[i].autor);
+                do {
+                    printf("\nDigite o autor do livro: ");
                     fflush(stdin);
-                    len = strlen(ficha[i].autor);
-
-                    if (len < MIN_LEN)
-                    {
-                        printf("\nO nome do autor deve ter pelo menos %d letras.\n", MIN_LEN);
-                    }else
-                    {
-                        for (j = 0; j < len; j++)
-                        {
-                            if (!isalpha(ficha[i].autor[j]))
-                            {
-                                printf("\nO nome do autor deve conter apenas letras.\n");
-                                break;
-                            }
-                        }
+                    scanf("%[^\n]s", &ficha[i].autor);
+                    if (strlen(ficha[i].autor) < 4) {
+                        printf("\nO autor do livro deve ter pelo menos 4 caracteres.\n");
+                        resultadoScanf = 0;
+                    } else {
+                        resultadoScanf = 1;
                     }
-                }while (len < MIN_LEN || j < len);
+                    while (getchar() != '\n');
+                } while (resultadoScanf != 1);
                 printf("\nAutor do livro alterado\n");
                 system("pause");
                 system("cls");
@@ -511,28 +408,18 @@ void AlteraLivro()
         case 4:
             for (i=0; i<20; i++)
             {
-                do
-                {
-                    printf("\nInforme a area do livro que deseja alterar: ");
-                    scanf("%s", &ficha[i].area);
+                do {
+                    printf("\nDigite a area do livro: ");
                     fflush(stdin);
-                    len = strlen(ficha[i].area);
-
-                    if (len < MIN_LEN)
-                    {
-                        printf("\nA area do livro deve ter pelo menos %d letras\n", MIN_LEN);
-                    }else
-                    {
-                        for (j = 0; j < len; j++)
-                        {
-                            if (!isalpha(ficha[i].area[j]))
-                            {
-                                printf("\nA area do livro deve conter apenas letras.\n");
-                                break;
-                            }
-                        }
+                    scanf("%[^\n]s", &ficha[i].area);
+                    if (strlen(ficha[i].area) < 4) {
+                        printf("\nA area do livro deve ter pelo menos 4 caracteres.\n");
+                        resultadoScanf = 0;
+                    } else {
+                        resultadoScanf = 1;
                     }
-                }while (len < MIN_LEN || j < len);
+                    while (getchar() != '\n');
+                } while (resultadoScanf != 1);
                 printf("\nArea do livro alterado\n");
                 system("pause");
                 system("cls");
@@ -545,6 +432,7 @@ void AlteraLivro()
                 do
                 {
                     printf("\nDigite o ano do livro: ");
+                    fflush(stdin);
                     verifica = scanf("%d", &ficha[i].ano);
                     fflush(stdin);
 
@@ -571,28 +459,18 @@ void AlteraLivro()
         case 6:
             for (i=0; i<20; i++)
             {
-                do
-                {
-                    printf("\nInforme a editora do livro que deseja alterar: ");
+                do {
+                    printf("\nDigite a editora do livro: ");
                     fflush(stdin);
-                    scanf("%s", &ficha[i].editora);
-                    len = strlen(ficha[i].editora);
-
-                    if (len < MIN_LEN)
-                    {
-                        printf("\nA editora do livro deve ter pelo menos %d letras\n", MIN_LEN);
-                    }else
-                    {
-                        for (j = 0; j < len; j++)
-                        {
-                            if (!isalpha(ficha[i].editora[j]))
-                            {
-                                printf("\nA editora do livro deve conter apenas letras.\n");
-                                break;
-                            }
-                        }
+                    scanf("%[^\n]s", &ficha[i].editora);
+                    if (strlen(ficha[i].editora) < 4) {
+                        printf("\nA editora do livro deve ter pelo menos 4 caracteres.\n");
+                        resultadoScanf = 0;
+                    } else {
+                        resultadoScanf = 1;
                     }
-                }while (len < MIN_LEN || j < len);
+                    while (getchar() != '\n');
+                } while (resultadoScanf != 1);
                 printf("\nEditora do livro alterado\n");
                 system("pause");
                 system("cls");
@@ -623,9 +501,8 @@ int main()
         printf("\t\t\t|    1 - Cadastrar livros               |\n");
         printf("\t\t\t|    2 - Imprimir os livros cadastrados |\n");
         printf("\t\t\t|    3 - Pesquisar livros por codigo    |\n");
-        printf("\t\t\t|    4 - Ordenar os livros por ano      |\n");
-        printf("\t\t\t|    5 - Excluir dados do livro         |\n");
-        printf("\t\t\t|    6 - Alterar dados do livro         |\n");
+        printf("\t\t\t|    4 - Excluir dados do livro         |\n");
+        printf("\t\t\t|    5 - Alterar dados do livro         |\n");
         printf("\t\t\t|    0 - Sair                           |\n");
         printf ("\t\t\t|                                       |\n");
         printf ("\t\t\t=========================================\n");
@@ -645,12 +522,9 @@ int main()
         PesquisarLivros();
         break;
     case 4:
-        OrdenaLivros();
-        break;
-    case 5:
         RemoveLivros();
         break;
-    case 6:
+    case 5:
         AlteraLivro();
         break;
     case 0:
